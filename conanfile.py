@@ -53,6 +53,7 @@ class TesseractConan(ConanFile):
         cmake.definitions['BUILD_TRAINING_TOOLS'] = self.options.with_training
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["STATIC"] = not self.options.shared
+        cmake.definitions['CPPAN_BUILD'] = False
 
         # provide patched lept.pc
         shutil.copy(os.path.join(self.deps_cpp_info['leptonica'].rootpath, 'lib', 'pkgconfig', 'lept.pc'), 'lept.pc')
