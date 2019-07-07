@@ -2,7 +2,7 @@
 
 | Bintray | Windows | Linux & macOS |
 |:--------:|:---------:|:-----------------:|
-|[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/tesseract%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/tesseract%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-tesseract?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-tesseract)|[![Build Status](https://travis-ci.org/bincrafters/conan-tesseract.svg)](https://travis-ci.org/bincrafters/conan-tesseract)|
+|[ ![Download](https://api.bintray.com/packages/bincrafters/public-conan/tesseract%3Abincrafters/images/download.svg) ](https://bintray.com/bincrafters/public-conan/tesseract%3Abincrafters/_latestVersion)|[![Build status](https://ci.appveyor.com/api/projects/status/github/bincrafters/conan-tesseract?svg=true)](https://ci.appveyor.com/project/BinCrafters/conan-tesseract)|[![Build Status](https://travis-ci.com/bincrafters/conan-tesseract.svg)](https://travis-ci.com/bincrafters/conan-tesseract)|
 
 ## Conan.io Information
 
