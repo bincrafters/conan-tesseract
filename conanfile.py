@@ -20,7 +20,7 @@ class TesseractConan(ConanFile):
     default_options = {'shared': False, 'fPIC': True, 'with_training': False}
     _source_subfolder = "source_subfolder"
 
-    requires = "leptonica/1.76.0@bincrafters/stable"
+    requires = "leptonica/1.78.0"
 
     def source(self):
         sha256 = '5c5ed5f1a76888dc57a83704f24ae02f8319849f5c4cf19d254296978a1a1961'
