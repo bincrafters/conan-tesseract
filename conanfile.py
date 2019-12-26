@@ -12,7 +12,7 @@ class TesseractConan(ConanFile):
     homepage = "https://github.com/tesseract-ocr/tesseract"
     exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt"]
-    generators = "cmake"
+    generators = "cmake", "pkg_config"
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False],
                "fPIC": [True, False],
@@ -50,10 +50,6 @@ class TesseractConan(ConanFile):
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["STATIC"] = not self.options.shared
         cmake.definitions['CPPAN_BUILD'] = False
-
-        # provide patched lept.pc
-        shutil.copy(os.path.join(self.deps_cpp_info['leptonica'].rootpath, 'lib', 'pkgconfig', 'lept.pc'), 'lept.pc')
-        tools.replace_prefix_in_pc_file("lept.pc", self.deps_cpp_info['leptonica'].rootpath)
 
         # VS build uses cmake to locate leptonica
         use_pkg_config = self.settings.compiler != "Visual Studio"
