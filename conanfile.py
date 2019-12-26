@@ -38,11 +38,10 @@ class TesseractConan(ConanFile):
             # do not enforce failure and allow user to build with system cairo, pango, fontconfig
             self.output.warn("*** Build with training is not yet supported, continue on your own")
 
-    def system_requirements(self):
-        """ Temporary requirement until pkgconfig_installer is introduced """
-        if tools.os_info.is_linux and tools.os_info.with_apt:
-            installer = tools.SystemPackageTool()
-            installer.install('pkg-config')
+    def build_requirements(self):
+        if tools.os_info.is_linux:
+            if not tools.which('pkg-config'):
+                self.build_requires('pkg-config_installer/0.29.2@bincrafters/stable')
 
     def build(self):
         cmake = CMake(self)
