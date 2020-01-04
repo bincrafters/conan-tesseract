@@ -54,9 +54,6 @@ class TesseractConan(ConanFile):
         use_pkg_config = self.settings.compiler != "Visual Studio"
         # use cmake-based configure even for unix
         use_pkg_config = False
-        
-        if os.path.isfile('leptonica.pc'):
-            os.rename('leptonica.pc', 'lept.pc')
 
         # if static leptonica used with pkg-config, tesseract must use Leptonica_STATIC_LIBRARIES
         # which use static dependencies like jpeg, png etc provided by lept.pc
