@@ -8,6 +8,7 @@ class TesseractConan(ConanFile):
     version = "4.1.1"
     description = "Tesseract Open Source OCR Engine"
     url = "http://github.com/bincrafters/conan-tesseract"
+    topics = ("conan", "ocr", "image", "multimedia", "graphics")
     license = "Apache-2.0"
     homepage = "https://github.com/tesseract-ocr/tesseract"
     exports = ["LICENSE.md"]
