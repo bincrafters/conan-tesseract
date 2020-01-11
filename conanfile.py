@@ -113,3 +113,5 @@ class TesseractConan(ConanFile):
         if self.settings.compiler == "Visual Studio":
             if not self.options.shared:
                 self.cpp_info.libs.append('ws2_32')
+        self.cpp_info.names["cmake_find_package"] = "Tesseract"
+        self.cpp_info.names["cmake_find_package_multi"] = "Tesseract"
