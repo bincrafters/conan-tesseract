@@ -38,7 +38,7 @@ class TesseractConan(ConanFile):
             # do not enforce failure and allow user to build with system cairo, pango, fontconfig
             self.output.warn("*** Build with training is not yet supported, continue on your own")
 
-    def build(self):
+    def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions['BUILD_TRAINING_TOOLS'] = self.options.with_training
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
@@ -52,6 +52,11 @@ class TesseractConan(ConanFile):
 
         # Set Leptonica_DIR to ensure that find_package will be called in original CMake file
         cmake.definitions['Leptonica_DIR'] = self.deps_cpp_info['leptonica'].rootpath
+
+        cmake.configure(source_folder=self._source_subfolder)
+        return cmake
+
+    def build(self):
         # Use generated cmake module files
         tools.replace_in_file(
             os.path.join(self._source_subfolder, "CMakeListsOriginal.txt"),
@@ -72,12 +77,8 @@ class TesseractConan(ConanFile):
             "include_directories(${Leptonica_INCLUDE_DIRS})\n"
             "include_directories(${CONAN_LEPTONICA_ROOT}/include/leptonica)")
 
-        cmake.configure(source_folder=self._source_subfolder)
+        cmake = self._configure_cmake()
         cmake.build()
-        cmake.install()
-        cmake.patch_config_paths()
-
-        self._fix_absolute_paths()
 
     def _fix_absolute_paths(self):
         # Fix pc file: cmake does not fill libs.private
@@ -91,6 +92,12 @@ class TesseractConan(ConanFile):
                                   'Libs.private: ' + ' '.join(libs_private))
 
     def package(self):
+        cmake = self._configure_cmake()
+        cmake.install()
+        cmake.patch_config_paths()
+
+        self._fix_absolute_paths()
+
         self.copy("LICENSE", src=self._source_subfolder, dst="licenses", ignore_case=True, keep_path=False)
         # remove man pages
         shutil.rmtree(os.path.join(self.package_folder, 'share', 'man'), ignore_errors=True)
@@ -100,7 +107,6 @@ class TesseractConan(ConanFile):
                 os.remove(os.path.join(self.package_folder, 'bin', 'tesseract'+ext))
             except:
                 pass
-
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
