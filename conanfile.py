@@ -71,23 +71,9 @@ class TesseractConan(ConanFile):
         cmake = self._configure_cmake()
         cmake.build()
 
-    def _fix_absolute_paths(self):
-        # Fix pc file: cmake does not fill libs.private
-        if self.settings.compiler != "Visual Studio":
-            libs_private = []
-            libs_private.extend(['-L'+path for path in self.deps_cpp_info['leptonica'].lib_paths])
-            libs_private.extend(['-l'+lib for lib in self.deps_cpp_info['leptonica'].libs])
-            path = os.path.join(self.package_folder, 'lib', 'pkgconfig', 'tesseract.pc')
-            tools.replace_in_file(path,
-                                  'Libs.private:',
-                                  'Libs.private: ' + ' '.join(libs_private))
-
     def package(self):
         cmake = self._configure_cmake()
         cmake.install()
-        cmake.patch_config_paths()
-
-        self._fix_absolute_paths()
 
         self.copy("LICENSE", src=self._source_subfolder, dst="licenses", ignore_case=True, keep_path=False)
         # remove man pages
@@ -98,6 +84,10 @@ class TesseractConan(ConanFile):
                 os.remove(os.path.join(self.package_folder, 'bin', 'tesseract'+ext))
             except:
                 pass
+        # remove pkgconfig
+        tools.rmdir(os.path.join(self.package_folder, 'lib', 'pkgconfig'))
+        # remove cmake
+        tools.rmdir(os.path.join(self.package_folder, 'cmake'))
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
