@@ -5,7 +5,6 @@ from conans import ConanFile, CMake, tools
 
 class TesseractConan(ConanFile):
     name = "tesseract"
-    version = "4.1.1"
     description = "Tesseract Open Source OCR Engine"
     url = "http://github.com/bincrafters/conan-tesseract"
     topics = ("conan", "ocr", "image", "multimedia", "graphics")
@@ -25,9 +24,9 @@ class TesseractConan(ConanFile):
     requires = "leptonica/1.78.0"
 
     def source(self):
-        sha256 = '2a66ff0d8595bff8f04032165e6c936389b1e5727c3ce5a27b3e059d218db1cb'
-        tools.get("https://github.com/tesseract-ocr/tesseract/archive/%s.tar.gz" % self.version, sha256=sha256)
-        os.rename("tesseract-" + self.version, self._source_subfolder)
+        tools.get(**self.conan_data["sources"][self.version])
+        extracted_dir = self.name + "-" + self.version
+        os.rename(extracted_dir, self._source_subfolder)
 
     def config_options(self):
         if self.settings.os == "Windows":
