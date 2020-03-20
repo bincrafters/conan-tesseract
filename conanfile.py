@@ -20,6 +20,7 @@ class TesseractConan(ConanFile):
     default_options = {'shared': False, 'fPIC': True, 'with_training': False}
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
+    _cmake = None
 
     requires = "leptonica/1.79.0"
 
@@ -36,7 +37,9 @@ class TesseractConan(ConanFile):
             self.output.warn("*** Build with training is not yet supported, continue on your own")
 
     def _configure_cmake(self):
-        cmake = CMake(self)
+        if self._cmake:
+            return self._cmake
+        cmake = self._cmake = CMake(self)
         cmake.definitions['BUILD_TRAINING_TOOLS'] = self.options.with_training
         cmake.definitions["BUILD_SHARED_LIBS"] = self.options.shared
         cmake.definitions["STATIC"] = not self.options.shared
