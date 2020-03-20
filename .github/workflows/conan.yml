@@ -22,8 +22,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { name: "GCC 4.9 Debug", compiler: "GCC", version: "4.9", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
-          - { name: "GCC 4.9 Release", compiler: "GCC", version: "4.9", os: "ubuntu-18.04", buildType: "Release", recipeType: "" }
           - { name: "GCC 5 Debug", compiler: "GCC", version: "5", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
           - { name: "GCC 5 Release", compiler: "GCC", version: "5", os: "ubuntu-18.04", buildType: "Release", recipeType: "" }
           - { name: "GCC 6 Debug", compiler: "GCC", version: "6", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
@@ -34,10 +32,6 @@ jobs:
           - { name: "GCC 8 Release", compiler: "GCC", version: "8", os: "ubuntu-18.04", buildType: "Release", recipeType: "" }
           - { name: "GCC 9 Debug", compiler: "GCC", version: "9", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
           - { name: "GCC 9 Release", compiler: "GCC", version: "9", os: "ubuntu-18.04", buildType: "Release", recipeType: "" }
-          - { name: "CLANG 3.9 Debug", compiler: "CLANG", version: "3.9", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
-          - { name: "CLANG 3.9 Release", compiler: "CLANG", version: "3.9", os: "ubuntu-18.04", buildType: "Release", recipeType: "" }
-          - { name: "CLANG 4.0 Debug", compiler: "CLANG", version: "4.0", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
-          - { name: "CLANG 4.0 Release", compiler: "CLANG", version: "4.0", os: "ubuntu-18.04", buildType: "Release", recipeType: "" }
           - { name: "CLANG 5.0 Debug", compiler: "CLANG", version: "5.0", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
           - { name: "CLANG 5.0 Release", compiler: "CLANG", version: "5.0", os: "ubuntu-18.04", buildType: "Release", recipeType: "" }
           - { name: "CLANG 6.0 Debug", compiler: "CLANG", version: "6.0", os: "ubuntu-18.04", buildType: "Debug", recipeType: "" }
