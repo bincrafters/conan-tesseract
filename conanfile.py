@@ -21,7 +21,7 @@ class TesseractConan(ConanFile):
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
-    requires = "leptonica/1.78.0"
+    requires = "leptonica/1.79.0"
 
     def source(self):
         tools.get(**self.conan_data["sources"][self.version])
@@ -67,12 +67,6 @@ class TesseractConan(ConanFile):
             os.path.join(self._source_subfolder, "CMakeLists.txt"),
             "${Leptonica_LIBRARIES}",
             "Leptonica::Leptonica")
-        # temporary workaround until conan-center-index/pull/648 is merged
-        tools.replace_in_file(
-            os.path.join(self._source_subfolder, "CMakeLists.txt"),
-            "include_directories(${Leptonica_INCLUDE_DIRS})",
-            "include_directories(${Leptonica_INCLUDE_DIRS})\n"
-            "include_directories(${CONAN_LEPTONICA_ROOT}/include/leptonica)")
 
         cmake = self._configure_cmake()
         cmake.build()
