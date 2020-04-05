@@ -10,7 +10,6 @@ class TesseractConan(ConanFile):
     topics = ("conan", "ocr", "image", "multimedia", "graphics")
     license = "Apache-2.0"
     homepage = "https://github.com/tesseract-ocr/tesseract"
-    exports = ["LICENSE.md"]
     exports_sources = ["CMakeLists.txt"]
     generators = "cmake", "cmake_find_package"
     settings = "os", "arch", "compiler", "build_type"
